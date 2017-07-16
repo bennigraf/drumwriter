@@ -11,7 +11,8 @@ Controller.prototype = {
         '#': 'COMMENT',
         '|': 'PLAYALONG',
         '=': 'VELOCITY',
-        '+': 'PITCH'
+        '+': 'PITCH',
+        '@': 'COMMAND',
     },
     
     helloWorld: function() {
@@ -54,6 +55,7 @@ Controller.prototype = {
      *      - "#": defines a comment (the line is to be ignored)
      *      - "|": A score line that is to be played along with the current main line
      *      - "=": A velocity score
+     *      - "@": A command, i.e. to set the tempo/bpm
      *      - others TBD. Maybe a pitch score?
      * */
     findCurrentCodeblock: function() {
