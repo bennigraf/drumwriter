@@ -22,8 +22,9 @@ The main idea was to mimic http://typedrummer.com/, but improve some shortcoming
  * not being able to write multiple patterns/rhythms in the same document and switch between them
  * not being able to run multiple lines/rhythms in parallel ("polyphinc")
 
-But: The textarea doesn't react immediatly to input but only on a special command (currently ctrl+enter) – differently than 
-     on http://typedrummer.com/!
+But: The textarea doesn't react immediatly to input but only on a special command (currently ctrl+enter) – differently than on http://typedrummer.com/!
+
+Note: There's also http://rustleworks.com/textxox/, but this also doesn't allow multiple rhythms per document and uses one line per "instrument".
 
 *Todo*: Define syntax!
 
