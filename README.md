@@ -45,3 +45,14 @@ In Flocking, complex audio processing seems to be easier, but for now and for th
 
  * Uses Zepto.js (http://zeptojs.com/) as lightweight jQuery replacement
  
+### Roadmap:
+
+*For now*: Get it working with the minimal syntax as defined in `Controller.js`. Basically make it output audio. *Then*: Put it on github.io or something like that.
+
+*Later*: 
+
+ 1. Transfer it to other platforms (android/ios to make it, well, mobile – phonegap ftw.?!)
+ 2. Build a nice vintage standalone drummachine from it using an old keyboard, a Raspberry Pi or similar and one of those old micro-tvs I have laying around.
+ 3. On web & mobile: Maybe add some sharing/collaboration to it, i.e. share to facebook for fame and glory.
+ 4. ?
+ 5. Profit!
