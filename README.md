@@ -12,6 +12,10 @@ TBD(-efined & -ocumented)
 
 Because such things seldomly run nicely directly from the filesystem, there's a small script that starts a docker container with a light http deamon that hosts the actual html & JS app. After running it via `app/run-with-docker.sh`, the app is accessible at http://localhost:8090/.
 
+The building is done by webpack. To install the requirements, run `$ yarn install`. To make a build once, run `$ yarn run build`. To watch files for changes, run `$ yarn run watch`. 
+
+HTML, CSS and some JS libraries are still "statically" included/copied from `/src` to `/dist` – this should be migrated to webpack at some point.
+
 ### The DSL 
 
 ...is supposed to be live-code-friendly, simple to learn, reactive.

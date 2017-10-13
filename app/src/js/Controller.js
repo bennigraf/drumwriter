@@ -1,7 +1,7 @@
-
 function Controller($textarea) {
     this.$textarea = $textarea;
 }
+module.exports = Controller;
 
 Controller.prototype = {
     /**
@@ -13,6 +13,7 @@ Controller.prototype = {
         '=': 'VELOCITY',
         '+': 'PITCH',
         '@': 'COMMAND',
+        // '?': 'RANDOM'
     },
     
     helloWorld: function() {

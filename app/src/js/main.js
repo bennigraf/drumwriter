@@ -1,4 +1,13 @@
 
+/** Some resources are loaded "statically" – ToDo: use webpack properly for this... */
+require('file-loader?name=index.html!../index.html');
+require('file-loader?name=css/normalize.css!../css/normalize.css');
+require('file-loader?name=css/style.css!../css/style.css');
+require('file-loader?name=js/lib/zepto.min.js!./lib/zepto.min.js');
+
+import Controller from './Controller.js';
+import AudioEngine from './AudioEngine.js';
+
 // runs when page is ready
 Zepto(function() {
 
