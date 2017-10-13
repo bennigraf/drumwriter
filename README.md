@@ -48,6 +48,8 @@ In Flocking, complex audio processing seems to be easier, but for now and for th
 ### Other:
 
  * Uses Zepto.js (http://zeptojs.com/) as lightweight jQuery replacement
+ * Uses webpack for JS packing; static resources (HTML, CSS and JS libraries) are copied statically for now.
+ * CI with CircleCI, which deploys to http://lab.bennigraf.de/drumwriter/ – configuration in `/.circleci/`
  
 ### Roadmap:
 
