@@ -1,5 +1,7 @@
 # drumwriter
 
+[![CircleCI](https://circleci.com/gh/bennigraf/drumwriter.svg?style=shield)](https://circleci.com/gh/bennigraf/drumwriter)
+
 Early draft of a text-only drum machine. Deployed with CircleCI to http://lab.bennigraf.de/drumwriter/
 
 ## Usage
