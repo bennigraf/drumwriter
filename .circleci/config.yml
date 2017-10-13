@@ -36,6 +36,12 @@ jobs:
       # build!
       - run: yarn run build
       
+      # prepare for deployment
+      - run:
+          name: Fix host authenticity for musca.uberspace.de
+          command: |
+            ssh-keyscan musca.uberspace.de >> ~/.ssh/known_hosts
+      
       # deploy!
       - deploy:
           name: lab.bennigraf.de/drumwriter
