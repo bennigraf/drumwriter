@@ -38,7 +38,8 @@ jobs:
       
   # These commands are triggered only after a successful (green) build.
   deployment:
-    dev:
+    production:
+      branch: master
       commands:
         - scp -r app/dist/* begra@musca.uberspace.de:/var/www/virtual/begra/lab.bennigraf.de/drumwriter/
 
