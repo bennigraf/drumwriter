@@ -1,4 +1,5 @@
-function Controller($textarea) {
+function Controller(registry, $textarea) {
+    this.registry = registry;
     this.$textarea = $textarea;
 }
 module.exports = Controller;
@@ -36,6 +37,9 @@ Controller.prototype = {
             console.log("===== play");
             var codeBlock = this.findCurrentCodeblock();
             console.log(codeBlock);
+            
+            this.registry.audioEngine.play();
+            
             return false;
         }
         
