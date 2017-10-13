@@ -1,6 +1,6 @@
 # drumwriter
 
-Early draft of a text-only drum machine.
+Early draft of a text-only drum machine. Deployed with CircleCI to http://lab.bennigraf.de/drumwriter/
 
 ## Usage
 
