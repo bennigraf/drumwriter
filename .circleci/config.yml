@@ -36,11 +36,9 @@ jobs:
       # build!
       - run: yarn run build
       
-  # These commands are triggered only after a successful (green) build.
-  deployment:
-    production:
-      branch: master
-      commands:
-        - scp -r app/dist/* begra@musca.uberspace.de:/var/www/virtual/begra/lab.bennigraf.de/drumwriter/
-
-
+      # deploy!
+      - deploy:
+          name: lab.bennigraf.de/drumwriter
+          command: scp -r app/dist/* begra@musca.uberspace.de:/var/www/virtual/begra/lab.bennigraf.de/drumwriter/
+      
+      
