@@ -1,6 +1,8 @@
 
-import AudioEngine from './AudioEngine.js';
 import InputController from './InputController.js';
+import Parser from './Parser.js';
+import AudioEngine from './AudioEngine.js';
+import AudioController from './AudioController.js';
 import Bottle from 'Bottlejs';
 
 export default App;
@@ -29,7 +31,9 @@ App.prototype = {
 	},
   
   setupBottle: function() {
+    this.bottle.service('Parser', Parser);
+    this.bottle.service('AudioController', AudioController);
     this.bottle.service('AudioEngine', AudioEngine);
-    this.bottle.service('InputController', InputController, 'AudioEngine');
+    this.bottle.service('InputController', InputController, 'Parser', 'AudioController', 'AudioEngine');
   }
 }
