@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "bottlejs": "^1.6.1",
     "file-loader": "^1.1.5",
     "mocha": "^4.0.1",
     "webpack": "^3.7.1"

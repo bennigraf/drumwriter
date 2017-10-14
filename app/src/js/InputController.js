@@ -1,5 +1,5 @@
-function InputController(registry) {
-    this.registry = registry;
+function InputController(audioEngine) {
+    this._audioEngine = audioEngine;
 }
 module.exports = InputController;
 
@@ -53,14 +53,14 @@ InputController.prototype = {
             var codeBlock = this.findCurrentCodeblock();
             console.log(codeBlock);
             
-            this.registry.audioEngine.play();
+            this._audioEngine.play();
             
             return false;
         }
  
         if (event.key == ".") {
             console.log("stahp");
-            this.registry.audioEngine.stop();
+            this._audioEngine.stop();
             return false;
         }
         
