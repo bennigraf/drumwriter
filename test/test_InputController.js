@@ -5,14 +5,12 @@ const InputController = require('../app/src/js/InputController.js');
 describe('InputController', function() {
   
   describe('#constructor', function() {
-    it('can be created with a registry and a textarea', function() {
-      var registry = 'aRegistry';
+    it('can be created', function() {
+      var controller = new InputController();
       
-      var controller = new InputController(registry);
-      
-      assert.equal(controller.registry,
-        registry,
-        'controller.registry was not set by constructor'
+      assert.notEqual(controller,
+        undefined,
+        'controller is undefined'
       );
     });
   });

@@ -1,5 +1,4 @@
 
-import Registry from './Registry.js';
 import AudioEngine from './AudioEngine.js';
 import InputController from './InputController.js';
 import Bottle from 'Bottlejs';
