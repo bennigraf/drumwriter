@@ -83,7 +83,7 @@ Controller.prototype = {
         var codeBlockStart = null;
         var mainLine = null;
         for (let i = cursorLineNumber; i >= 0; i--) {
-            var line = $.trim(allLines[i]);
+            var line = allLines[i].trim();
             if (line[0] !== undefined && this.controlChars[line[0]] === undefined) {
                 codeBlockStart = i;
                 mainLine = i;
@@ -99,7 +99,7 @@ Controller.prototype = {
         // find code block end by searching for the next non-empty line not starting with a special character
         var codeBlockEnd = null;
         for (let i = codeBlockStart + 1; i < allLines.length; i++) {
-            var line = $.trim(allLines[i]);
+            var line = allLines[i].trim();
             if (line[0] !== undefined && this.controlChars[line[0]] === undefined) {
                 // if main line was found already, this is the end. Otherwise, we have to continue our search.
                 if (mainLine !== null) {
@@ -111,7 +111,7 @@ Controller.prototype = {
             }
         }
         if (codeBlockEnd === null) {
-            codeBlockEnd = allLines.length;
+            codeBlockEnd = allLines.length - 1;
         }
         
         // console.log(codeBlockStart, codeBlockEnd);
@@ -119,12 +119,17 @@ Controller.prototype = {
         //     console.log(allLines[i]);
         // }
         
+        // trim whitespace from whithin each line
+        for (let i in allLines) {
+            allLines[i] = allLines[i].replace(/\s/g, '');
+        }
+        
         // now collect all lines in the code block that are important (ignoring empty and comment lines)
         // todo: Make a code block object from that which contains the parsing logic and defines
         //   the main line etc. as special keys...
         var codeBlockLines = [];
         for (let i = codeBlockStart; i <= codeBlockEnd; i++) {
-            var line = $.trim(allLines[i]);
+            var line = allLines[i];
             if (line[0] !== undefined && line[0] !== '#') {
                 codeBlockLines.push(line);
             }
