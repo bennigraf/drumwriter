@@ -34,7 +34,7 @@ App.prototype = {
   
   setupBottle: function() {
     this.bottle.service('Parser', Parser);
-    this.bottle.service('AudioController', AudioController);
+    this.bottle.service('AudioController', AudioController, 'AudioEngine');
     this.bottle.service('AudioEngine', AudioEngine);
     this.bottle.service('InputController', InputController, 'Parser', 'AudioController', 'AudioEngine');
   }

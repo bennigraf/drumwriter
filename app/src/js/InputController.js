@@ -43,18 +43,17 @@ InputController.prototype = {
             console.log("===== play");
             
             var codeBlock = this._parser.findCurrentCodeblock(this.$textarea);
+            this._audioController.playBlock(codeBlock);
             
-            
-            console.log(codeBlock);
-            
-            this._audioEngine.play();
+            // this._audioEngine.play();
             
             return false;
         }
  
         if (event.key == ".") {
             console.log("stahp");
-            this._audioEngine.stop();
+            // this._audioEngine.stop();
+            this._audioController.stopAll();
             return false;
         }
         

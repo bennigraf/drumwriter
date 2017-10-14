@@ -5,6 +5,8 @@ require('file-loader?name=css/normalize.css!../css/normalize.css');
 require('file-loader?name=css/style.css!../css/style.css');
 require('file-loader?name=js/lib/zepto.min.js!./lib/zepto.min.js');
 require('file-loader?name=a.mp3!../assets/audio/a.mp3');
+require('file-loader?name=e.mp3!../assets/audio/e.mp3');
+require('file-loader?name=k.mp3!../assets/audio/k.mp3');
 
 import App from './App.js';
 
