@@ -1,9 +1,11 @@
 
+// import Bottle from 'Bottlejs'; // doesn't work with CircleCI?!
+import Bottle from '../../../node_modules/bottlejs';
+
 import InputController from './InputController.js';
 import Parser from './Parser.js';
 import AudioEngine from './AudioEngine.js';
 import AudioController from './AudioController.js';
-import Bottle from 'Bottlejs';
 
 export default App;
 
