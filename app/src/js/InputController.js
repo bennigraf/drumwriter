@@ -1,6 +1,5 @@
 function InputController(registry) {
     this.registry = registry;
-    console.log(this.registry);
 }
 module.exports = InputController;
 

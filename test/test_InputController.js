@@ -7,18 +7,12 @@ describe('InputController', function() {
   describe('#constructor', function() {
     it('can be created with a registry and a textarea', function() {
       var registry = 'aRegistry';
-      var textarea = 'aTextarea';
       
-      var controller = new InputController(registry, textarea);
+      var controller = new InputController(registry);
       
       assert.equal(controller.registry,
         registry,
         'controller.registry was not set by constructor'
-      );
-      assert.equal(
-        controller.$textarea, 
-        textarea,
-        'controller.textarea was not set by constructor'
       );
     });
   });
@@ -31,7 +25,8 @@ describe('InputController', function() {
         selectionStart: 0
       };
       
-      let controller = new InputController({ }, textareaMock);
+      let controller = new InputController({ });
+      controller.$textarea = textareaMock;
       
       assert.deepEqual(
         controller.findCurrentCodeblock(),
@@ -45,7 +40,8 @@ describe('InputController', function() {
         selectionStart: 0
       };
       
-      let controller = new InputController({ }, textareaMock);
+      let controller = new InputController({ });
+      controller.$textarea = textareaMock;
       
       assert.deepEqual(
         controller.findCurrentCodeblock(),
@@ -63,7 +59,8 @@ abcd
         selectionStart: 6
       };
       
-      let controller = new InputController({ }, textareaMock);
+      let controller = new InputController({ });
+      controller.$textarea = textareaMock;
       
       assert.deepEqual(
         controller.findCurrentCodeblock(),
@@ -80,7 +77,8 @@ abcd
         selectionStart: 25
       };
       
-      let controller = new InputController({ }, textareaMock);
+      let controller = new InputController({ });
+      controller.$textarea = textareaMock;
       
       assert.deepEqual(
         controller.findCurrentCodeblock(),
@@ -102,7 +100,10 @@ thesecondblock
 thethirdblock`,
           selectionStart: selectionStart
         };
-        return (new InputController({ }, textareaMock)).findCurrentCodeblock()
+
+        var controller = new InputController({ });
+        controller.$textarea = textareaMock;
+        return controller.findCurrentCodeblock()
       }
       
       assert.deepEqual(
