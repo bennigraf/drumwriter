@@ -32,7 +32,8 @@ Controller.prototype = {
         // actions:
         // - on ctrl+enter, parse current block and run synth with it
         //   - (if synth is not running, start it)
-        
+        // - on ".", stop (should be ctrl+., but that doesn't work for some reason)
+ 
         if (event.key == "Enter" && event.ctrlKey) {
             console.log("===== play");
             var codeBlock = this.findCurrentCodeblock();
@@ -40,6 +41,12 @@ Controller.prototype = {
             
             this.registry.audioEngine.play();
             
+            return false;
+        }
+ 
+        if (event.key == ".") {
+            console.log("stahp");
+            this.registry.audioEngine.stop();
             return false;
         }
         

@@ -7,10 +7,17 @@ module.exports = AudioEngine;
 AudioEngine.prototype = {
     play: function() {
         Tone.Transport.start();
-        var loop = new Tone.Loop(function() {
+        
+        this.bassBeat = Tone.Transport.scheduleRepeat(() => {
             console.log("bass!");
             this.bass.start();
-        }.bind(this), 1);
-        loop.start();
+        }, 1);
+        console.log(this.bassBeat);
+    },
+    
+    stop: function() {
+        console.log("stop");
+        Tone.Transport.clear(this.bassBeat);
+        Tone.Transport.stop();
     }
 }
