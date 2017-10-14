@@ -1,10 +1,10 @@
-function Controller(registry, $textarea) {
+function InputController(registry) {
     this.registry = registry;
-    this.$textarea = $textarea;
+    console.log(this.registry);
 }
-module.exports = Controller;
+module.exports = InputController;
 
-Controller.prototype = {
+InputController.prototype = {
     /**
      * Start with definitions/"statics"
      */
@@ -15,6 +15,21 @@ Controller.prototype = {
         '+': 'PITCH',
         '@': 'COMMAND',
         // '?': 'RANDOM'
+    },
+
+    bindToDom: function () {
+        this.$textarea = Zepto('#themachine textarea');
+
+        this.setupInputEvent();
+    },
+
+    setupInputEvent: function() {
+        this.$textarea.on('keydown', (e) => {
+            // console.log("keydown!");
+            // console.log(e);
+            // return false;
+            return this.keydownEvent(e);
+        });
     },
     
     helloWorld: function() {
@@ -27,7 +42,7 @@ Controller.prototype = {
      * happening.
      */
     keydownEvent: function(event) {
-        // console.log(e);
+        console.log(event.key, event.ctrlKey);
         
         // actions:
         // - on ctrl+enter, parse current block and run synth with it
@@ -71,7 +86,7 @@ Controller.prototype = {
      *      - others TBD. Maybe a pitch score?
      * */
     findCurrentCodeblock: function() {
-        var fullContent = this.$textarea.value;
+        var fullContent = this.$textarea.val();
         var selectionStart = this.$textarea.selectionStart;
         var cursorLineNumber = fullContent.substr(0, selectionStart).split("\n").length - 1; // first line is line 0
         var allLines = fullContent.split("\n");

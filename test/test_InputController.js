@@ -1,15 +1,15 @@
 const assert = require('assert');
 
-const Controller = require('../app/src/js/Controller.js');
+const InputController = require('../app/src/js/InputController.js');
 
-describe('Controller', function() {
+describe('InputController', function() {
   
   describe('#constructor', function() {
     it('can be created with a registry and a textarea', function() {
       var registry = 'aRegistry';
       var textarea = 'aTextarea';
       
-      var controller = new Controller(registry, textarea);
+      var controller = new InputController(registry, textarea);
       
       assert.equal(controller.registry,
         registry,
@@ -27,11 +27,11 @@ describe('Controller', function() {
     it('parses an empty input correctly', function() {
       // cheap textareaMock - should be replaced with i.e. sinon.js at some point
       let textareaMock = {
-        value: '',
+        val: () => '',
         selectionStart: 0
       };
       
-      let controller = new Controller({ }, textareaMock);
+      let controller = new InputController({ }, textareaMock);
       
       assert.deepEqual(
         controller.findCurrentCodeblock(),
@@ -41,11 +41,11 @@ describe('Controller', function() {
     
     it('parses a single line input correctly', function() {
       let textareaMock = {
-        value: `abcd`,
+        val: () => `abcd`,
         selectionStart: 0
       };
       
-      let controller = new Controller({ }, textareaMock);
+      let controller = new InputController({ }, textareaMock);
       
       assert.deepEqual(
         controller.findCurrentCodeblock(),
@@ -55,7 +55,7 @@ describe('Controller', function() {
     
     it('parses a single line input with whitespace correctly', function() {
       let textareaMock = {
-        value: `
+        val: () => `
 abcd
 
 
@@ -63,7 +63,7 @@ abcd
         selectionStart: 6
       };
       
-      let controller = new Controller({ }, textareaMock);
+      let controller = new InputController({ }, textareaMock);
       
       assert.deepEqual(
         controller.findCurrentCodeblock(),
@@ -73,14 +73,14 @@ abcd
     
     it('parses a multi line input correctly', function() {
       let textareaMock = {
-        value: ` abs sckj saf fjek
+        val: () => ` abs sckj saf fjek
 =\`-- \`,,,
 |kek s..d fsd .sf.
 `,
         selectionStart: 25
       };
       
-      let controller = new Controller({ }, textareaMock);
+      let controller = new InputController({ }, textareaMock);
       
       assert.deepEqual(
         controller.findCurrentCodeblock(),
@@ -96,13 +96,13 @@ abcd
       
       var testParsingWithSelectionStartAt = function(selectionStart) {
         let textareaMock = {
-          value: `thefirstblock
+          val: () => `thefirstblock
 thesecondblock
 |with a parallel line
 thethirdblock`,
           selectionStart: selectionStart
         };
-        return (new Controller({ }, textareaMock)).findCurrentCodeblock()
+        return (new InputController({ }, textareaMock)).findCurrentCodeblock()
       }
       
       assert.deepEqual(
