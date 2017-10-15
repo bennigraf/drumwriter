@@ -1,9 +1,11 @@
+import Playable from './Playable.js';
+
 function InputController(parser, audioController, audioEngine) {
     this._audioEngine = audioEngine;
     this._parser = parser;
     this._audioController = audioController;
 }
-module.exports = InputController;
+export default InputController;
 
 InputController.prototype = {
 
@@ -42,8 +44,11 @@ InputController.prototype = {
         if (event.key == "Enter" && event.ctrlKey) {
             console.log("===== play");
             
-            var codeBlock = this._parser.findCurrentCodeblock(this.$textarea);
-            this._audioController.playBlock(codeBlock);
+            const codeBlock = this._parser.findCurrentCodeblock(this.$textarea);
+            const playable = new Playable(codeBlock);
+            console.log(playable);
+            
+            this._audioController.playBlock(playable);
             
             // this._audioEngine.play();
             

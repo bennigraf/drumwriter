@@ -7,11 +7,14 @@ module.exports = AudioController;
 
 AudioController.prototype = {
   
-  playBlock: function(block) {
-    this.currentBlock = block;
+  playBlock: function(playable) {
+    this.currentBlock = playable;
     
-    const mainLine = block[0];
-    console.log('playing', mainLine);
+    console.log('playing', playable.sequences[0].sequence);
+    
+    if (playable.specials.bpm !== undefined) {
+      Tone.Transport.bpm.value = playable.specials.bpm;
+    }
     
     if (Tone.Transport.state != "started") {
       Tone.Transport.start();
@@ -21,7 +24,7 @@ AudioController.prototype = {
   },
   
   scheduleNextEvent: function() {
-    const mainLine = this.currentBlock[0];
+    const mainLine = this.currentBlock.sequences[0].sequence;
     const char = mainLine[this.sequencePosition];
     
     // const nextTime = Tone.Transport.nextSubdivision('8n');

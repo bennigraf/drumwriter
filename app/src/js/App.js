@@ -4,6 +4,7 @@ import Bottle from '../../../node_modules/bottlejs';
 
 import InputController from './InputController.js';
 import Parser from './Parser.js';
+import Playable from './Playable.js';
 import AudioEngine from './AudioEngine.js';
 import AudioController from './AudioController.js';
 
@@ -34,6 +35,7 @@ App.prototype = {
   
   setupBottle: function() {
     this.bottle.service('Parser', Parser);
+    this.bottle.service('Playable', Playable);
     this.bottle.service('AudioController', AudioController, 'AudioEngine');
     this.bottle.service('AudioEngine', AudioEngine);
     this.bottle.service('InputController', InputController, 'Parser', 'AudioController', 'AudioEngine');
