@@ -20,18 +20,16 @@ AudioController.prototype = {
       Tone.Transport.start();
     }
     
-    this.nextEvent = this.scheduleNextEvent();
+    this.nextEvent = this.scheduleNextEvent('+1i');
   },
   
-  scheduleNextEvent: function() {
+  scheduleNextEvent: function(nextTime = '+1i') {
     const mainLine = this.currentBlock.sequences[0].sequence;
     const char = mainLine[this.sequencePosition];
     
-    // const nextTime = Tone.Transport.nextSubdivision('8n');
-    const nextTime = '+4n';
     const nextEvent = Tone.Transport.scheduleOnce(() => {
       this._audioEngine.playInstrument(char);
-      this.nextEvent = this.scheduleNextEvent();
+      this.nextEvent = this.scheduleNextEvent('+4n');
     }, nextTime);
     
     this.sequencePosition = (this.sequencePosition + 1) % mainLine.length;
