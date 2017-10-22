@@ -18,7 +18,7 @@ AudioEngine.prototype = {
     }
   }
   
-  // play: function() {
+// play: function() {
 //
 //     this.bassBeat = Tone.Transport.scheduleRepeat(() => {
 //         console.log("bass!");

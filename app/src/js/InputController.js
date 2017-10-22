@@ -1,11 +1,13 @@
-import Playable from './Playable.js';
+// import Playable from './Playable.js';
+const Playable = require('./Playable.js');
 
 function InputController(parser, audioController, audioEngine) {
     this._audioEngine = audioEngine;
     this._parser = parser;
     this._audioController = audioController;
 }
-export default InputController;
+// export default InputController;
+module.exports = InputController;
 
 InputController.prototype = {
 
