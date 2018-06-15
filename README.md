@@ -26,7 +26,7 @@ The main idea was to mimic http://typedrummer.com/, but improve some shortcoming
 
  * Not being able to set the tempo
  * not being able to write multiple patterns/rhythms in the same document and switch between them
- * not being able to run multiple lines/rhythms in parallel ("polyphinc")
+ * not being able to run multiple lines/rhythms in parallel ("polyphonic")
 
 But: The textarea doesn't react immediatly to input but only on a special command (currently ctrl+enter) – differently than on http://typedrummer.com/!
 
