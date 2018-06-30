@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "babel-preset-env": "^1.7.0",
     "bottlejs": "^1.6.1",
     "eventstop": "^2.1.0",
     "file-loader": "^1.1.5",
@@ -9,6 +10,6 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch --devtool eval-cheap-module-source-map",
-    "test": "mocha"
+    "test": "mocha --require babel-core/register"
   }
 }
