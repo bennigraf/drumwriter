@@ -2,6 +2,7 @@
 function AudioEngine() {
   this.samplePlayers = new Tone.Players({
     b: 'e.mp3', // bassdrum
+    a: 'a.mp3', // another bassdrum
     t: 'k.mp3', // snare
     z: 'h.mp3' // HiHat
   }).toMaster();
