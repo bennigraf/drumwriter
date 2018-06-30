@@ -34,9 +34,10 @@ Parser.prototype = {
      *      - "@": A command, i.e. to set the tempo/bpm
      *      - others TBD. Maybe a pitch score?
      * */
-    findCurrentCodeblock: function(textarea) {
-        var fullContent = textarea.val();
-        var selectionStart = textarea.selectionStart;
+    findCurrentCodeblock: function(textareaObj) {
+        var fullContent = textareaObj.content;
+        var selectionStart = textareaObj.cursorPosition;
+        console.log(textareaObj);
         var cursorLineNumber = fullContent.substr(0, selectionStart).split("\n").length - 1; // first line is line 0
         var allLines = fullContent.split("\n");
         

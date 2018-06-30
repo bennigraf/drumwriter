@@ -1,4 +1,6 @@
 import PlayableSequence from'./PlayableSequence';
+import TextareaService from './TextareaService';
+
 const eventstop = require('eventstop')();
 
 function InputController(parser) {
@@ -13,7 +15,8 @@ InputController.prototype = {
 
     bindToDom: function () {
         this.$textarea = Zepto('#themachine textarea');
-
+        this.$textarea.focus();
+        
         this.setupInputEvent();
     },
 
@@ -39,7 +42,8 @@ InputController.prototype = {
         // - on ctrl+., emit 'stopAll'
  
         if (event.key === "Enter" && event.ctrlKey) {
-            const codeBlock = this._parser.findCurrentCodeblock(this.$textarea);
+            const normalizedTaContent = TextareaService.getContentAndPositionObject(this.$textarea);
+            const codeBlock = this._parser.findCurrentCodeblock(normalizedTaContent);
             const playable = new PlayableSequence(codeBlock);
             this.emit('playSequence', playable);
             
