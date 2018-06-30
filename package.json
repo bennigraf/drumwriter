@@ -1,15 +1,16 @@
 {
-  "dependencies": {
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch --devtool eval-cheap-module-source-map",
+    "test": "mocha --require babel-core/register"
+  },
+  "devDependencies": {
     "babel-preset-env": "^1.7.0",
+    "babel-core": "^6.26.3",
     "bottlejs": "^1.6.1",
     "eventstop": "^2.1.0",
     "file-loader": "^1.1.5",
     "mocha": "^4.0.1",
     "webpack": "^3.7.1"
-  },
-  "scripts": {
-    "build": "webpack",
-    "watch": "webpack --watch --devtool eval-cheap-module-source-map",
-    "test": "mocha --require babel-core/register"
   }
 }
