@@ -39,7 +39,6 @@ Parser.prototype = {
         var selectionStart = textarea.selectionStart;
         var cursorLineNumber = fullContent.substr(0, selectionStart).split("\n").length - 1; // first line is line 0
         var allLines = fullContent.split("\n");
-        // console.log(allLines);
         
         // find code block start by stepping backwards through all lines searching for a non-empty line not starting with
         //   a special character.
@@ -77,11 +76,6 @@ Parser.prototype = {
         if (codeBlockEnd === null) {
             codeBlockEnd = allLines.length - 1;
         }
-        
-        // console.log(codeBlockStart, codeBlockEnd);
-        // for (let i = codeBlockStart; i <= codeBlockEnd; i++) {
-        //     console.log(allLines[i]);
-        // }
         
         // trim whitespace from whithin each line
         for (let i in allLines) {

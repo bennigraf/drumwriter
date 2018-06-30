@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "bottlejs": "^1.6.1",
+    "eventstop": "^2.1.0",
     "file-loader": "^1.1.5",
     "mocha": "^4.0.1",
     "webpack": "^3.7.1"

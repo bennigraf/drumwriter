@@ -21,48 +21,46 @@
 			<textarea id="">
 # Start typing here!
 
-# is a comment.
-
  b.t.bbt.
-=     ,
+=-,
 |zzzzzzzz
-=`   `   
+=`---`---
+
 </textarea>
 		</div>
 		
 		<pre  class="description">
-# marks a comment – the line is being ignored
+Type any sequence of characters ([A-Za-z]) in a line to 
+create a loop. Fine-control that sequence by adding lines 
+beginning with special control characters below the "main 
+sequence". 
 
-Type any sequence of characters in a line to create a loop.
-
-Hit ctrl+Enter to run the code block around the current 
+Hit `ctrl+Enter` to run the line set around the current 
 cursor position (which could be as little as the current
-line).
+line). `ctrl+.` stops playback.
 
-Special characters for sequencing:
- - " " (white space) is being ignored - use it to format lines
+Special characters:
+ - " " (white space) is being ignored - use it to format/indent lines
+ - # marks a comment (all characters following this will be ignored)
  - . is a break
- - | marks lines to be played simultaneously
+ - | marks lines to be played simultaneously to the "main line"
  - = marks a line that's used to define the velocity of the notes of the line above
- 	- - (or nothing/white space) is the default velocity
+ 	- - is the default velocity
 	- ` is high velocity/"accent"
 	- , is lower velocity
- - (abc) will play "abc" as triplets
+ - ❌ (abc) will play "abc" as triplets
  - @ allows one to set some 'settings':
-    - `@bpm <number>` sets the current bpm
+    - ✅ `@bpm <number>` sets the current bpm
 
 Special keys:
- - Enter/Return: Jumps to the next line (starts playback if nothing's running)
- - Space: Start/Stop playpack
- - Tab: Hit repeatedly to tab in tempo
- - +/-: Increase/decrease bpm by 1
+ - ❌ ctrl + arrow up/down: Jumps to previous/next lineset (starts playback if nothing's running)
+ - ❌ Space: Start/Stop playpack
+ - ❌ Tab: Hit repeatedly to tab in tempo
+ - ❌ +/-: Increase/decrease bpm by 1
 		</pre>
 
         <script src="js/lib/zepto.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/tone/0.10.0/Tone.min.js"></script>
-        <!-- <script src="js/Controller.js"></script> -->
-        <!-- <script src="js/AudioEngine.js"></script> -->
-        <!-- <script src="js/main.js"></script> -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/tone/13.1.33/Tone.min.js"></script>
         <script src="app.js"></script>
     </body>
 </html>

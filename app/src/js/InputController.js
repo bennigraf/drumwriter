@@ -1,15 +1,15 @@
-// import Playable from './Playable.js';
-const Playable = require('./Playable.js');
+import PlayableSequence from'./PlayableSequence';
+const eventstop = require('eventstop')();
 
-function InputController(parser, audioController, audioEngine) {
-    this._audioEngine = audioEngine;
+function InputController(parser) {
     this._parser = parser;
-    this._audioController = audioController;
 }
-// export default InputController;
-module.exports = InputController;
+export default InputController;
 
 InputController.prototype = {
+    on: eventstop.on,
+    off: eventstop.off,
+    emit: eventstop.emit,
 
     bindToDom: function () {
         this.$textarea = Zepto('#themachine textarea');
@@ -19,15 +19,9 @@ InputController.prototype = {
 
     setupInputEvent: function() {
         this.$textarea.on('keydown', (e) => {
-            // console.log("keydown!");
             // console.log(e);
-            // return false;
-            return this.keydownEvent(e);
+            return this.handleKeydownEvent(e);
         });
-    },
-    
-    helloWorld: function() {
-        console.log("Hello Controller!", this);
     },
     
     /**
@@ -35,34 +29,27 @@ InputController.prototype = {
      * to orgininal event handler so returning false prevents action from
      * happening.
      */
-    keydownEvent: function(event) {
+    handleKeydownEvent: function(event) {
+        console.log(event);
         console.log(event.key, event.ctrlKey);
         
         // actions:
-        // - on ctrl+enter, parse current block and run synth with it
-        //   - (if synth is not running, start it)
-        // - on ".", stop (should be ctrl+., but that doesn't work for some reason)
+        // - on ctrl+enter, parse current block and generate playabale
+        //   - emit 'playSequence' with that playable
+        // - on ctrl+., emit 'stopAll'
  
-        if (event.key == "Enter" && event.ctrlKey) {
-            console.log("===== play");
-            
+        if (event.key === "Enter" && event.ctrlKey) {
             const codeBlock = this._parser.findCurrentCodeblock(this.$textarea);
-            const playable = new Playable(codeBlock);
-            console.log(playable);
-            
-            this._audioController.playBlock(playable);
-            
-            // this._audioEngine.play();
+            const playable = new PlayableSequence(codeBlock);
+            this.emit('playSequence', playable);
             
             return false;
         }
  
-        if (event.key == ".") {
-            console.log("stahp");
-            // this._audioEngine.stop();
-            this._audioController.stopAll();
+        if (event.keyCode === 190 && event.ctrlKey) {
+            this.emit('stopAll');
+
             return false;
         }
-        
     },
 }
