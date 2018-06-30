@@ -1,6 +1,6 @@
 const assert = require('assert');
 
-const InputController = require('../app/src/js/InputController.js');
+import InputController from '../app/src/js/InputController.js';
 
 describe('InputController', function() {
   

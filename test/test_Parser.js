@@ -1,70 +1,70 @@
 const assert = require('assert');
 
-const Parser = require('../app/src/js/Parser.js');
+import Parser from '../app/src/js/Parser.js';
 
 describe('Parser', function() {
   
   describe('#findCurrentCodeblock', function() {
     it('parses an empty input correctly', function() {
-      // cheap textareaMock - should be replaced with i.e. sinon.js at some point
-      let textareaMock = {
-        val: () => '',
-        selectionStart: 0
+      
+      const textareaObj = {
+        content: '',
+        cursorPosition: 0
       };
       
-      let parser = new Parser();
+      const parser = new Parser();
       
       assert.deepEqual(
-        parser.findCurrentCodeblock(textareaMock),
+        parser.findCurrentCodeblock(textareaObj),
         [ ]
       );
     });
     
     it('parses a single line input correctly', function() {
-      let textareaMock = {
-        val: () => `abcd`,
-        selectionStart: 0
+      const textareaObj = {
+        content: `abcd`,
+        cursorPosition: 0
       };
       
-      let parser = new Parser();
+      const parser = new Parser();
       
       assert.deepEqual(
-        parser.findCurrentCodeblock(textareaMock),
+        parser.findCurrentCodeblock(textareaObj),
         [ 'abcd' ]
       );
     });
     
     it('parses a single line input with whitespace correctly', function() {
-      let textareaMock = {
-        val: () => `
+      let textareaObj = {
+        content: `
 abcd
 
 
 `,
-        selectionStart: 6
+        cursorPosition: 6
       };
       
       let parser = new Parser();
       
       assert.deepEqual(
-        parser.findCurrentCodeblock(textareaMock),
+        parser.findCurrentCodeblock(textareaObj),
         [ 'abcd' ]
       );
     });
     
     it('parses a multi line input correctly', function() {
-      let textareaMock = {
-        val: () => ` abs sckj saf fjek
+      let textareaObj = {
+        content: ` abs sckj saf fjek
 =\`-- \`,,,
 |kek s..d fsd .sf.
 `,
-        selectionStart: 25
+        cursorPosition: 25
       };
       
       let parser = new Parser();
       
       assert.deepEqual(
-        parser.findCurrentCodeblock(textareaMock),
+        parser.findCurrentCodeblock(textareaObj),
         [ 
           'abssckjsaffjek',
           '=\`--\`,,,',
@@ -75,72 +75,120 @@ abcd
     
     it('parses input with multiple blocks correctly', function() {
       
-      var testParsingWithSelectionStartAt = function(selectionStart) {
-        let textareaMock = {
-          val: () => `thefirstblock
+      const textareaObj = {
+        content: `thefirstblock
 thesecondblock
 |with a parallel line
-thethirdblock`,
-          selectionStart: selectionStart
-        };
 
+thethirdblock`,
+        cursorPosition: 0
+      };
+
+      function testParsingWithCursorPositionAt(cursorPosition) {
         var parser = new Parser();
-        return parser.findCurrentCodeblock(textareaMock)
+        textareaObj.cursorPosition = cursorPosition;
+        return parser.findCurrentCodeblock(textareaObj)
       }
       
       assert.deepEqual(
-        testParsingWithSelectionStartAt(0),
+        testParsingWithCursorPositionAt(0),
         [ 'thefirstblock' ],
         'first block not found with selection at 0'
       );
       
       assert.deepEqual(
-        testParsingWithSelectionStartAt(4),
+        testParsingWithCursorPositionAt(4),
         [ 'thefirstblock' ],
         'first block not found with selection at 4'
       );
       
       assert.deepEqual(
-        testParsingWithSelectionStartAt(13),
+        testParsingWithCursorPositionAt(13),
         [ 'thefirstblock' ],
         'first block not found with selection at 13'
       );
       
       assert.deepEqual(
-        testParsingWithSelectionStartAt(14),
+        testParsingWithCursorPositionAt(14),
         [ 'thesecondblock', '|withaparallelline' ],
         'second block not found with selection at 14'
       );
       
       assert.deepEqual(
-        testParsingWithSelectionStartAt(24),
+        testParsingWithCursorPositionAt(24),
         [ 'thesecondblock', '|withaparallelline' ],
         'second block not found with selection at 24'
       );
       
       assert.deepEqual(
-        testParsingWithSelectionStartAt(50),
+        testParsingWithCursorPositionAt(50),
         [ 'thesecondblock', '|withaparallelline' ],
         'second block not found with selection at 50'
       );
       
       assert.deepEqual(
-        testParsingWithSelectionStartAt(51),
+        testParsingWithCursorPositionAt(52),
         [ 'thethirdblock' ],
-        'third block not found with selection at 51'
+        'third block not found with selection at 52'
       );
       
       assert.deepEqual(
-        testParsingWithSelectionStartAt(58),
+        testParsingWithCursorPositionAt(58),
         [ 'thethirdblock' ],
         'third block not found with selection at 58'
       );
       
       assert.deepEqual(
-        testParsingWithSelectionStartAt(64),
+        testParsingWithCursorPositionAt(64),
         [ 'thethirdblock' ],
         'third block not found with selection at 64'
       );
+      
+    });
+
+    it('parsers a complex multi input correctly', () => {
+      const textareaObj = {
+        content: `# Start typing here!
+
+ b.t.bbt.
+=-,
+|z
+=*
+@bpm 120
+
+
+ bb.bt...b.b.t...
+=-,
+|z
+=*
+@bpm 240
+
+`,
+        cursorPosition: 0
+      };
+
+      function testParsingWithTextarea(textareaObj) {
+        var parser = new Parser();
+        return parser.findCurrentCodeblock(textareaObj)
+      }
+
+      for (let cursorPosition = 0; cursorPosition <= 52; cursorPosition++) {
+        textareaObj.cursorPosition = cursorPosition;
+        assert.deepEqual(
+          testParsingWithTextarea(textareaObj),
+          [ 'b.t.bbt.', '=-,', '|z', '=*', '@bpm120' ],
+          'Complex parsing error, expected first code block for cursorPosition ' + cursorPosition
+        );
+      }
+
+      for (let cursorPosition = 53; cursorPosition <= 91; cursorPosition++) {
+        textareaObj.cursorPosition = cursorPosition;
+        assert.deepEqual(
+          testParsingWithTextarea(textareaObj),
+          [ 'bb.bt...b.b.t...', '=-,', '|z', '=*', '@bpm240' ],
+          'Complex parsing error, expected second code block for cursorPosition ' + cursorPosition
+        );
+      }
       
     });
   });
