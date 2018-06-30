@@ -6,9 +6,20 @@ Early draft of a text-only drum machine. Deployed with CircleCI to http://lab.be
 
 ## Usage
 
-TBD(-efined & -ocumented)
+Open http://lab.bennigraf.de/drumwriter/ and check the description!
 
-## Development thoughts
+## Development
+
+### ToDo for now:
+
+ - Add tests for `PlayableSequence` parsing
+ - Add tests for the Sequencer
+ - Add tests for the InputController (check if events are thrown correctly)
+ - Add more "instruments"/samples
+ - Add some effects (reverb/delay, crunch, compression, ...) and come up with some syntax to control them
+ - Maybe add some way to "mix" parallel tracks
+ - Currently, any sample can apparently only be played once in parallel, because that's how Tone.js "Players" work. Maybe find a way to be more polyphonic...
+ - *Make it look better!*
 
 ### Runtime environment:
 
@@ -20,7 +31,7 @@ HTML, CSS and some JS libraries are still "statically" included/copied from `/sr
 
 ### The DSL 
 
-...is supposed to be live-code-friendly, simple to learn, reactive.
+...is supposed to be live-code-friendly, simple to learn, reactive. The syntax is work in progress. The current features are described in `index.html`.
 
 The main idea was to mimic http://typedrummer.com/, but improve some shortcomings, which are (to me)
 
@@ -31,8 +42,6 @@ The main idea was to mimic http://typedrummer.com/, but improve some shortcoming
 But: The textarea doesn't react immediatly to input but only on a special command (currently ctrl+enter) – differently than on http://typedrummer.com/!
 
 Note: There's also http://rustleworks.com/textxox/, but this also doesn't allow multiple rhythms per document and uses one line per "instrument".
-
-*Todo*: Define syntax!
 
 ### The audio engine
 
