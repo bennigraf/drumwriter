@@ -37,7 +37,6 @@ Parser.prototype = {
     findCurrentCodeblock: function(textareaObj) {
         var fullContent = textareaObj.content;
         var selectionStart = textareaObj.cursorPosition;
-        console.log(textareaObj);
         var cursorLineNumber = fullContent.substr(0, selectionStart).split("\n").length - 1; // first line is line 0
         var allLines = fullContent.split("\n");
         
